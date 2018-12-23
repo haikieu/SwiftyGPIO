@@ -456,6 +456,20 @@ public enum SupportedBoard {
     case BeagleBoneBlack
     case OrangePi
     case OrangePiZero
+    
+    public var stringValue: String {
+        switch self {
+        case .BeagleBoneBlack: return "BeableBoneBlack"
+        case .CHIP: return "CHIP"
+        case .OrangePi: return "OrangePi"
+        case .OrangePiZero: return "OrangePiZero"
+        case .RaspberryPi2: return "RaspberryPi2"
+        case .RaspberryPi3: return "RaspberryPi3"
+        case .RaspberryPiPlusZero: return "RaspberryPiPlusZero"
+        case .RaspberryPiRev1: return "RaspberryPiRev1"
+        case .RaspberryPiRev2: return "RaspberryPiRev2"
+        }
+    }
 }
 
 public enum GPIOName {
