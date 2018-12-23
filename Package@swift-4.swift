@@ -16,6 +16,11 @@ let package = Package(
         .target(
             name: "SwiftyGPIO",
             path: "Sources"
+        ),
+        .testTarget(
+            name: "SwiftyGPIOTests",
+            dependencies: ["SwiftyGPIO"],
+            path: "Tests"
         )
     ]
 )
