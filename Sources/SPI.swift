@@ -54,8 +54,8 @@ extension SwiftyGPIO {
 extension SwiftyGPIO {
     // RaspberryPis SPIs
     static let SPIRPI: [Int:SPIInterface] = [
-        0: SysFSSPI(spiId:"0.0"),
-        1: SysFSSPI(spiId:"0.1")
+        0: InstanceCreator.initSysFSSPI(spiId:"0.0"),
+        1: InstanceCreator.initSysFSSPI(spiId:"0.1")
     ]
 
     // CHIP SPIs
@@ -63,7 +63,7 @@ extension SwiftyGPIO {
     // See: https://bbs.nextthing.co/t/can-interface-spi-and-can-utils/18042/3
     //      https://bbs.nextthing.co/t/can-bus-mcp2515-via-spi-anyone/11388/2
     static let SPICHIP: [Int:SPIInterface] = [
-        0: SysFSSPI(spiId:"2.0")
+        0: InstanceCreator.initSysFSSPI(spiId:"2.0")
     ]
 }
 

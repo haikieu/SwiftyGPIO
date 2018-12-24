@@ -54,14 +54,14 @@ extension SwiftyGPIO {
 
     // RaspberryPis ARMv6 (all 1, Zero, Zero W) PWMs, only accessible ones, divided in channels (can use only one for each channel)
     static let PWMRPI1: [Int:[GPIOName:PWMOutput]] = [
-        0: [.P12: RaspberryPWM.instantiateWith(gpioId: 12, alt: 0, channel:0, baseAddr: 0x20000000), .P18: RaspberryPWM.instantiateWith(gpioId: 18, alt: 5, channel:0, baseAddr: 0x20000000)],
-        1: [.P13: RaspberryPWM.instantiateWith(gpioId: 13, alt: 0, channel:1, baseAddr: 0x20000000), .P19: RaspberryPWM.instantiateWith(gpioId: 19, alt: 5, channel:1, baseAddr: 0x20000000)]
+        0: [.P12: InstanceCreator.initRaspberryPWM(gpioId: 12, alt: 0, channel:0, baseAddr: 0x20000000), .P18: InstanceCreator.initRaspberryPWM(gpioId: 18, alt: 5, channel:0, baseAddr: 0x20000000)],
+        1: [.P13: InstanceCreator.initRaspberryPWM(gpioId: 13, alt: 0, channel:1, baseAddr: 0x20000000), .P19: InstanceCreator.initRaspberryPWM(gpioId: 19, alt: 5, channel:1, baseAddr: 0x20000000)]
     ]
 
     // RaspberryPis ARMv7 (2-3) PWMs, only accessible ones, divided in channels (can use only one for each channel)
     static let PWMRPI23: [Int:[GPIOName:PWMOutput]] = [
-        0: [.P12: RaspberryPWM.instantiateWith(gpioId: 12, alt: 0, channel:0, baseAddr: 0x3F000000), .P18: RaspberryPWM.instantiateWith(gpioId: 18, alt: 5, channel:0, baseAddr: 0x3F000000)],
-        1: [.P13: RaspberryPWM.instantiateWith(gpioId: 13, alt: 0, channel:1, baseAddr: 0x3F000000), .P19: RaspberryPWM.instantiateWith(gpioId: 19, alt: 5, channel:1, baseAddr: 0x3F000000)]
+        0: [.P12: InstanceCreator.initRaspberryPWM(gpioId: 12, alt: 0, channel:0, baseAddr: 0x3F000000), .P18: InstanceCreator.initRaspberryPWM(gpioId: 18, alt: 5, channel:0, baseAddr: 0x3F000000)],
+        1: [.P13: InstanceCreator.initRaspberryPWM(gpioId: 13, alt: 0, channel:1, baseAddr: 0x3F000000), .P19: InstanceCreator.initRaspberryPWM(gpioId: 19, alt: 5, channel:1, baseAddr: 0x3F000000)]
     ]
 }
 
@@ -105,18 +105,9 @@ public class RaspberryPWM: PWMOutput {
     var patternFrequency: Int = 0
     var patternDelay: Int = 0
     var dataLength: Int = 0
-    
-    ///This method will return a mock of PWMOutput instead of an actual RaspberryPWM instance. This provide the ability for the project which import SwiftyGPIO for compiling and run on MAC OS.
-    public static func instantiateWith(gpioId: UInt, alt: UInt, channel: Int, baseAddr: Int, dmanum: Int = 5) -> PWMOutput {
-        #if os(Linux)
-        return RaspberryPWM.init(gpioId: gpioId, alt: alt, channel: channel, baseAddr: baseAddr, dmanum: dmanum)
-        #else
-        return PWMOutputMock(gpioId: gpioId, alt: alt, channel: channel, baseAddr: baseAddr, dmanum: dmanum)
-        #endif
-    }
 
     //In order to create a instance, use static function instantiateWith(...)
-    private init(gpioId: UInt, alt: UInt, channel: Int, baseAddr: Int, dmanum: Int = 5) {
+    public init(gpioId: UInt, alt: UInt, channel: Int, baseAddr: Int, dmanum: Int = 5) {
         self.gpioId = gpioId
         self.alt = alt
         self.channel = channel

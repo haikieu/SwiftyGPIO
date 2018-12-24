@@ -62,6 +62,12 @@ open class PWMOutputMock: PWMOutput {
 
 open class SPIMock: SPIInterface {
     
+    let spiId: String
+   
+    public init(spiId: String) {
+        self.spiId=spiId
+    }
+    
     public var isHardware: Bool = true
     
     var sendDataWithFrequencyClosure: ((_ values: [UInt8],_ frequencyHz: UInt)->Void)?
@@ -87,6 +93,12 @@ open class SPIMock: SPIInterface {
 
 open class OneWireMock: OneWireInterface {
     
+    let masterId: Int
+    
+    init(masterId: Int) {
+        self.masterId = masterId
+    }
+    
     var getSlavesClosure: (()->[String])?
     public func getSlaves() -> [String] {
         return getSlavesClosure?() ?? []
@@ -100,7 +112,13 @@ open class OneWireMock: OneWireInterface {
 
 open class ADCMock: ADCInterface {
     
-    public var id: Int = 0
+    let adcPath: String
+    public let id: Int
+    
+    public init(adcPath: String, id: Int) {
+        self.adcPath = adcPath
+        self.id = id
+    }
     
     var getSampleClosure: (()->Int)?
     public func getSample() throws -> Int {
@@ -109,6 +127,12 @@ open class ADCMock: ADCInterface {
 }
 
 open class I2CMock: I2CInterface {
+    
+    let i2cId: Int
+    
+    public init(i2cId: Int) {
+        self.i2cId=i2cId
+    }
     
     var isReachableClosure: ((_ address: Int) -> Bool)?
     public func isReachable(_ address: Int) -> Bool {
@@ -167,6 +191,20 @@ open class I2CMock: I2CInterface {
 }
 
 open class UARTMock: UARTInterface {
+    
+    var device: String
+    var tty: termios
+    
+    public init?(_ uartIdList: [String]) {
+        // try all items in list until one works
+        
+        device = "/dev/" + (uartIdList.first ?? "")
+        tty = termios()
+    }
+    
+    public convenience init?(_ uartId: String) {
+        self.init([uartId])
+    }
     
     var configureInterfaceClosure: ((_ speed: UARTSpeed,_ bitsPerChar: CharSize,_ stopBits: StopBits,_ parity: ParityType)->Void)?
     public func configureInterface(speed: UARTSpeed, bitsPerChar: CharSize, stopBits: StopBits, parity: ParityType) {

@@ -43,7 +43,7 @@ extension SwiftyGPIO {
         case .RaspberryPi2:
             fallthrough
         case .RaspberryPi3:
-            return [SysFSOneWire(masterId: 1)]
+            return [InstanceCreator.initSysFSOneWire(masterId: 1)]
         default:
             return nil
         }

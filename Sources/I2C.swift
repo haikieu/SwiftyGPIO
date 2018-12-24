@@ -54,8 +54,8 @@ extension SwiftyGPIO {
 extension SwiftyGPIO {
     // RaspberryPis I2Cs
     static let I2CRPI: [Int:I2CInterface] = [
-        0: SysFSI2C(i2cId: 0),
-        1: SysFSI2C(i2cId: 1)
+        0: InstanceCreator.initSysFSI2C(i2cId: 0),
+        1: InstanceCreator.initSysFSI2C(i2cId: 1)
     ]
 
     // CHIP I2Cs
@@ -63,8 +63,8 @@ extension SwiftyGPIO {
     // i2c.1: after 4.4.13-ntc-mlc connected to the U13 header I2C interface
     // i2c.2: connected to the U14 header I2C interface, XIO gpios are connected on this bus
     static let I2CCHIP: [Int:I2CInterface] = [
-        1: SysFSI2C(i2cId: 1),
-        2: SysFSI2C(i2cId: 2),
+        1: InstanceCreator.initSysFSI2C(i2cId: 1),
+        2: InstanceCreator.initSysFSI2C(i2cId: 2),
     ]
 }
 
