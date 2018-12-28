@@ -5,17 +5,10 @@
 //  Created by Hai Kieu on 12/22/18.
 //  haikieu2907@icloud.com
 //
-// These mock classes are created to help cut off the dependency to Raspberry Environment,
-// So that when the project imports SwiftGPIO, your logic code will be able to run and verify its flows on non-raspberry environment.
+// These mock classes are created to help cut off the dependency to Raspberry Pi environment,
+// So that when the project imports SwiftGPIO, your logic code will be able to run and debug its flows on non-raspberry environment, especially MAC OS.
 //
-// You should consider to put the code which uses mock in macro.
-// For example:
-//
-// #if os(Linux)
-//  let pwm = RaspberryPWM(gpioId: gpioId, alt: alt, channel: channel, baseAddr: baseAddr, dmanum: dmanum)
-// #else
-//  let pwm = PWMOutputMock(gpioId: gpioId, alt: alt, channel: channel, baseAddr: baseAddr, dmanum: dmanum)
-// #endif
+// Additional, you can provide any extra logic, simulation logic, or test code to any method which you want by passing in the appropriate closures.
 
 open class PWMOutputMock: PWMOutput {
     
