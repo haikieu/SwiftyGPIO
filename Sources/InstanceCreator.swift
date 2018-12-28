@@ -5,6 +5,8 @@
 //  Created by Hai Kieu on 12/23/18.
 //
 
+/// This InstanceCreator helps instantiate any concrete instances of UARTInterface, SPIInterface, I2CInterface, ADCInterface, OneWireInterface, PWMOutput.
+/// If we set enable Mock to InstanceCreator on MAC OS, InstanceCreator will return the mock objects instead. So that We're able to run and debug the logic code without interruption due to Raspberry Pi hardware and OS dependencies.
 public class InstanceCreator {
     
     public static var enableMock: Bool = false
