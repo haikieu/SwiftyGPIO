@@ -11,7 +11,7 @@ public class InstanceCreator {
     
     public static func initSysFSUART(_ uartIdList: [String]) -> UARTInterface? {
         
-        #if !os(Linux) //This supposes to be MAC OS
+        #if os(macOS)
         if enableMock {
             return UARTMock(uartIdList)
         }
@@ -21,7 +21,7 @@ public class InstanceCreator {
     
     public static func initSysFSSPI(spiId: String) -> SPIInterface {
         
-        #if !os(Linux) //This supposes to be MAC OS
+        #if os(macOS)
         if enableMock {
             return SPIMock(spiId: spiId)
         }
@@ -31,7 +31,7 @@ public class InstanceCreator {
     
     public static func initSysFSI2C(i2cId: Int) -> I2CInterface {
         
-        #if !os(Linux) //This supposes to be MAC OS
+        #if os(macOS)
         if enableMock {
             return I2CMock(i2cId: i2cId)
         }
@@ -41,7 +41,7 @@ public class InstanceCreator {
     
     public static func initSysFSADC(adcPath: String, id: Int) -> ADCInterface {
         
-        #if !os(Linux) //This supposes to be MAC OS
+        #if os(macOS)
         if enableMock {
             return ADCMock(adcPath: adcPath, id: id)
         }
@@ -51,7 +51,7 @@ public class InstanceCreator {
     
     public static func initSysFSOneWire(masterId: Int) -> OneWireInterface {
         
-        #if !os(Linux) //This supposes to be MAC OS
+        #if os(macOS)
         if enableMock {
             return OneWireMock(masterId: masterId)
         }
@@ -61,7 +61,7 @@ public class InstanceCreator {
     
     public static func initRaspberryPWM(gpioId: UInt, alt: UInt, channel: Int, baseAddr: Int, dmanum: Int = 5) -> PWMOutput {
         
-        #if !os(Linux) //This supposes to be MAC OS
+        #if os(macOS)
         if enableMock {
             return PWMOutputMock(gpioId: gpioId, alt: alt, channel: channel, baseAddr: baseAddr, dmanum: dmanum)
         }
