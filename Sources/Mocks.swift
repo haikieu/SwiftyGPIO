@@ -186,13 +186,11 @@ open class I2CMock: I2CInterface {
 open class UARTMock: UARTInterface {
     
     var device: String
-    var tty: termios
     
     public init?(_ uartIdList: [String]) {
         // try all items in list until one works
         
         device = "/dev/" + (uartIdList.first ?? "")
-        tty = termios()
     }
     
     public convenience init?(_ uartId: String) {
